@@ -1,0 +1,19 @@
+# Python virtual environments
+Server/venv/
+Server/.venv/
+Server/env/
+**/venv/
+**/.venv/
+**/env/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Environment variables
+Server/.env
+**/.env
+.env
+
+# Node dependencies
+node_modules/
