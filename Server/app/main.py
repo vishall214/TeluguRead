@@ -1,5 +1,9 @@
-from fastapi import FastAPI
+
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
+
+from app.database import engine
 
 app = FastAPI(
     title="TeluguRead AI API",
@@ -30,3 +34,22 @@ def health_check():
         "status": "healthy",
         "application": "TeluguRead AI",
     }
+
+
+@app.get("/api/health/database")
+def database_health():
+    try:
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+
+        return {
+            "status": "connected",
+            "database": "PostgreSQL",
+            "application": "TeluguRead AI",
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=503,
+            detail="Database connection failed",
+        )
