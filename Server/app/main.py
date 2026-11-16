@@ -48,8 +48,14 @@ def database_health():
             "application": "TeluguRead AI",
         }
 
+
     except Exception:
         raise HTTPException(
             status_code=503,
             detail="Database connection failed",
         )
+
+
+
+
+
