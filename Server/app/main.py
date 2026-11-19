@@ -2,14 +2,18 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
-
+from app.routes.auth import router as auth_router
 from app.database import engine
+from app.routes.test_roles import router as test_roles_router
 
 app = FastAPI(
     title="TeluguRead AI API",
     description="Reading Assessment Platform for Telugu and English",
     version="1.0.0",
 )
+
+app.include_router(auth_router)
+app.include_router(test_roles_router)
 
 app.add_middleware(
     CORSMiddleware,
